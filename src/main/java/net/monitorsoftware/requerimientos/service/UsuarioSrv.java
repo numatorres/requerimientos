@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -32,6 +33,9 @@ public class UsuarioSrv {
             throw new IllegalStateException("Email Ya Existe");
         }
         else {
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            if (usuario.getModificado()==null){usuario.setModificado(timestamp);}
+            if (usuario.getCreado()==null){usuario.setCreado(timestamp);}
             System.out.println(usuario);
             usuarioRep.save(usuario);
         }

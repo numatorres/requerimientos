@@ -5,7 +5,6 @@ import net.monitorsoftware.requerimientos.service.UsuarioSrv;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
@@ -26,11 +25,6 @@ public class UsuarioCrtl {
 
     @PostMapping
     public void registrarUsuario(@RequestBody Usuario usuario) {
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-
-        if (usuario.getModificado()==null){usuario.setModificado(timestamp);}
-        if (usuario.getCreado()==null){usuario.setCreado(timestamp);}
-
         try{usuarioSrv.agregarUsuario(usuario);}
         catch (Exception e) {System.out.println(e.toString());}
     }
